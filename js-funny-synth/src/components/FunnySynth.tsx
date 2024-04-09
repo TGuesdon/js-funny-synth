@@ -1,13 +1,9 @@
-import { useEffect, useRef } from "react"
-import { Synth } from "../lib/synth";
+import { useEffect, useRef } from "react";
 import { notes } from "../lib/models";
-
-
+import { Synth } from "../lib/synth";
 
 export const FunnySynth = () => {
     const synth = useRef<Synth | null>(null);
-
-
 
     useEffect(() => {
         synth.current = new Synth();
@@ -20,7 +16,7 @@ export const FunnySynth = () => {
                     console.log(key);
                 }
             });
-        }
+        };
 
         const stop = (e: KeyboardEvent) => {
             notes.forEach(({ key, keyboard }) => {
@@ -28,24 +24,21 @@ export const FunnySynth = () => {
                     synth.current?.stopNote(key);
                 }
             });
-        }
+        };
 
-        window.addEventListener('keydown', play);
-        window.addEventListener('keyup', stop);
-        
-    
+        window.addEventListener("keydown", play);
+        window.addEventListener("keyup", stop);
 
         return () => {
             synth.current?.clean();
-            window.removeEventListener('keydown', play);
-            window.removeEventListener('keyup', stop);
-        }
-    }, [])
+            window.removeEventListener("keydown", play);
+            window.removeEventListener("keyup", stop);
+        };
+    }, []);
 
     return (
         <div>
             <h1>JS Funny Synth</h1>
-            
         </div>
-    )
-}
+    );
+};
